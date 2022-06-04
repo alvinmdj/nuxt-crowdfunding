@@ -11,7 +11,7 @@
           class="inline-block bg-orange-button hover:bg-green-button text-white font-semibold px-6 py-4 mt-8 text-lg rounded-full"
           @click="$router.push({ path: '/register' })"
         >
-          Getting Start
+          Get Started
         </button>
       </div>
     </div>
