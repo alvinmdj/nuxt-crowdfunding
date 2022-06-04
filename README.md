@@ -5,6 +5,37 @@
 - [Nuxt](https://nuxtjs.org/)
 - [Tailwind - Nuxt](https://tailwindcss.nuxtjs.org/)
 
+## Requirements
+
+- [Node.js v16+](https://nodejs.org/en/)
+- [NPM v5+](https://www.npmjs.com/)
+
+## Installation
+
+- Clone this repository:
+
+```sh
+git clone https://github.com/alvinmdj/nuxt-crowdfunding.git
+```
+
+- Go to the root directory:
+
+```sh
+cd nuxt-crowdfunding
+```
+
+- Install dependencies:
+
+```sh
+npm install
+```
+
+- Run (development):
+
+```sh
+npm run dev
+```
+
 ## Build Setup
 
 ```bash
