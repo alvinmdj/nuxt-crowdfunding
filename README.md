@@ -4,6 +4,7 @@
 
 - [Nuxt](https://nuxtjs.org/)
 - [Tailwind - Nuxt](https://tailwindcss.nuxtjs.org/)
+- [ESLint Plugin Vue](https://eslint.vuejs.org/)
 
 ## Requirements
 
