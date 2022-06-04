@@ -1,6 +1,6 @@
 <template>
   <div class="landing-page">
-    <div class="mx-0 sm:mx-40">
+    <div class="px-0 sm:px-40">
       <section class="landing-hero pt-5">
         <div class="header__bg"></div>
         <div class="container mx-auto relative">
