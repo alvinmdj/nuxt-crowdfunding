@@ -21,12 +21,13 @@ module.exports = {
   },
   plugins: [],
   content: [
-    `components/**/*.{vue,js}`,
-    `layouts/**/*.vue`,
-    `pages/**/*.vue`,
-    `composables/**/*.{js,ts}`,
-    `plugins/**/*.{js,ts}`,
-    `App.{js,ts,vue}`,
-    `app.{js,ts,vue}`
+    `./components/**/*.{vue,js}`,
+    `./layouts/**/*.vue`,
+    `./pages/**/*.vue`,
+    `./composables/**/*.{js,ts}`,
+    `./plugins/**/*.{js,ts}`,
+    `./nuxt.config.{js,ts}`,
+    `./App.{js,ts,vue}`,
+    `./app.{js,ts,vue}`
   ]
 }

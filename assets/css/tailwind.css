@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  max-width: 100%;
+}
+
 body {
   font-family: Poppins, sanf-serif;
 }
