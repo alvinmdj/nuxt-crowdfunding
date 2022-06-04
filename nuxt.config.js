@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-crowdfunding',
+    title: 'Nuxt Crowdfunding',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -46,12 +46,45 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: 'https://go-crowdfunding.herokuapp.com/',
+  },
+
+  // Auth with local schemes: https://auth.nuxtjs.org/schemes/local
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: {
+            url: '/api/v1/sessions',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          logout: false,
+          user: {
+            url: '/api/v1/users/fetch',
+            method: 'get',
+            propertyName: "data",
+          },
+        },
+      },
+    },
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
