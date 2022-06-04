@@ -1,11 +1,19 @@
 # Nuxt Crowdfunding
 
+Front-end for crowdfunding app (Nuxt.js)
+
+Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfunding)
+
 ## Links
 
+- [Vue](https://vuejs.org/)
 - [Nuxt](https://nuxtjs.org/)
 - [Tailwind - Nuxt](https://tailwindcss.nuxtjs.org/)
 - [Tailwind Nuxt Configuration](https://tailwindcss.com/docs/guides/nuxtjs)
 - [ESLint Plugin Vue](https://eslint.vuejs.org/)
+- [Auth - Nuxt](https://auth.nuxtjs.org/)
+- [Auth - Nuxt (Local Scheme)](https://auth.nuxtjs.org/schemes/local)
+- [Axios - Nuxt](https://axios.nuxtjs.org/)
 
 ## Requirements
 
