@@ -163,3 +163,9 @@
     <Footer />
   </div>
 </template>
+
+<script>
+export default {
+  name: "ProjectDetailPage",
+}
+</script>
