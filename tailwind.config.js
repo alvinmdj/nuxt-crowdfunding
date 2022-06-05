@@ -19,7 +19,9 @@ module.exports = {
   fontFamily: {
     sans: ['Poppins', 'sans-serif'],
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
   content: [
     `./components/**/*.{vue,js}`,
     `./layouts/**/*.vue`,
