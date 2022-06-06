@@ -13,6 +13,7 @@ Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfundi
 - [ESLint Plugin Vue](https://eslint.vuejs.org/)
 - [Auth - Nuxt](https://auth.nuxtjs.org/)
 - [Auth - Nuxt (Local Scheme)](https://auth.nuxtjs.org/schemes/local)
+- [Auth - Nuxt (API)](https://auth.nuxtjs.org/api/auth/)
 - [Axios - Nuxt](https://axios.nuxtjs.org/)
 
 ## Requirements

@@ -24,5 +24,6 @@ module.exports = {
         'success',
       ],
     }],
+    "no-console": "off",
   },
 }
