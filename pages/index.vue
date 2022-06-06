@@ -17,9 +17,9 @@
             </h2>
           </div>
           <div class="w-auto mt-5">
-            <!-- <NuxtLink class="text-gray-900 hover:underline text-md font-medium" to="/">
+            <NuxtLink class="text-gray-900 hover:underline text-md font-medium" to="/projects">
               View All
-            </NuxtLink> -->
+            </NuxtLink>
           </div>
         </div>
         <div class="grid grid-cols-3 gap-4 mt-3">
@@ -59,7 +59,7 @@ export default {
     Footer,
   },
   async asyncData({ $axios }) {
-    const campaigns = await $axios.$get("/api/v1/campaigns");
+    const campaigns = await $axios.$get("/api/v1/campaigns?limit=6");
     return { campaigns };
   },
 }
