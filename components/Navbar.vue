@@ -13,12 +13,12 @@
         </NuxtLink>
       </li>
       <li>
-        <a
+        <NuxtLink
           class="text-white hover:text-teal-500 text-lg px-4 py-3"
-          href="#"
+          to="/projects"
         >
           Project
-        </a>
+        </NuxtLink>
       </li>
       <li>
         <a

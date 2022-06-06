@@ -12,7 +12,7 @@
       </p>
       <button
         class="block bg-orange-button hover:bg-green-button text-white font-semibold px-12 py-3 text-xl rounded-full"
-        @click="$router.push({ path: '/' })"
+        @click="$router.push({ path: '/projects' })"
       >
         Find a Project
       </button>
