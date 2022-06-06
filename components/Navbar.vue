@@ -8,7 +8,7 @@
     <ul class="flex items-center">
       <li>
         <NuxtLink
-          class="text-white hover:text-teal-500 text-lg px-4 py-3"
+          class="text-white hover:text-teal-500 text-lg px-8 py-3"
           to="/"
         >
           Home
@@ -16,27 +16,11 @@
       </li>
       <li>
         <NuxtLink
-          class="text-white hover:text-teal-500 text-lg px-4 py-3"
+          class="text-white hover:text-teal-500 text-lg px-8 py-3"
           to="/projects"
         >
-          Project
+          Browse Projects
         </NuxtLink>
-      </li>
-      <li>
-        <a
-          class="text-white hover:text-teal-500 text-lg px-4 py-3"
-          href="#"
-        >
-          Features
-        </a>
-      </li>
-      <li>
-        <a
-          class="text-white hover:text-teal-500 text-lg px-4 py-3"
-          href="#"
-        >
-          Success Stories
-        </a>
       </li>
     </ul>
     <ul
