@@ -68,7 +68,7 @@
               class="block w-full bg-orange-button hover:bg-green-button text-white font-semibold px-6 py-4 text-lg rounded-full"
               @click="userRegister"
             >
-              Sign Up
+              Continue Sign Up
             </button>
           </div>
         </div>
