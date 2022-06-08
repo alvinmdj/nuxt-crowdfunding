@@ -78,14 +78,18 @@ export default {
   methods: {
     async userLogin() {
       try {
+        // Check if all fields are filled
+        if (!this.login.email || !this.login.password) {
+          this.errorMessage = 'Please fill in all fields';
+          return;
+        }
+
         // call the login endpoint set in nuxt.config.js
         const response = await this.$auth.loginWith('local', { data: this.login });
         this.$auth.setUser(response.data.data);
       }
       catch (error) {
-        if (this.login.email.length === 0 || this.login.password.length === 0) {
-          this.errorMessage = 'Please fill in all fields';
-        } else if (error.response.status === 422) {
+        if (error.response.status === 422) {
           this.errorMessage = 'Email or password is incorrect.';
         } else {
           this.errorMessage = 'An unknown error occurred. Please try again.';
