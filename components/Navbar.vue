@@ -46,7 +46,7 @@
     </ul>
     <div v-else class="flex ml-auto">
       <div class="dropdown inline-block relative z-10">
-        <button class="bg-white text-gray-700 font-semibold py-4 px-6 rounded inline-flex items-center">
+        <button class="bg-white text-gray-700 font-semibold py-4 px-6 rounded inline-flex justify-end items-center min-w-navbar">
           <img
             v-if="$auth.user.image_url"
             :src="`${$axios.defaults.baseURL}/${$auth.user.image_url}`"
