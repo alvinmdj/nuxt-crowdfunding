@@ -11,7 +11,7 @@
         <img
           v-else
           src="/project-thumbnail-2.jpg"
-          alt=""
+          alt="project preview"
           class="rounded-20 w-full h-28 lg:h-60 object-cover"
         />
       </figure>
@@ -43,15 +43,12 @@
           <div class="ml-auto font-semibold">Rp {{ new Intl.NumberFormat().format(campaign.goal_amount) }}</div>
         </div>
       </div>
-      <button
+      <NuxtLink
+        :to="`/projects/${campaign.id}`"
         class="text-center mt-5 button-cta block w-full bg-orange-button hover:bg-green-button text-white font-semibold px-6 py-2 text-lg rounded-full"
-        @click="$router.push({
-          name: 'campaign-id',
-          params: { id: campaign.id }
-        })"
       >
         Fund Now
-      </button>
+      </NuxtLink>
     </div>
   </div>
 </template>
