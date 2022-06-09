@@ -60,23 +60,35 @@
             </div>
 
             <h4 class="mt-5 font-semibold">What will you get:</h4>
-            <ul class="list-check mt-3">
+            <ul class="list-check my-3">
               <li v-for="(perk, index) in campaignDetail.data.perks" :key="index">
                 {{ perk }}
               </li>
             </ul>
-            <input
-              type="number"
-              class="border border-gray-500 block w-full px-6 py-3 mt-4 rounded-full text-gray-800 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline"
-              placeholder="Amount in Rp"
-              value=""
-            />
-            <NuxtLink
-              to="/fund-success"
-              class="text-center mt-3 button-cta block w-full bg-orange-button hover:bg-green-button text-white font-medium px-6 py-3 text-md rounded-full"
-            >
-              Fund Now
-            </NuxtLink>
+            <DangerAlert v-if="errorMessage !== ''" :error-message="errorMessage" />
+            <template v-if="$store.state.auth.loggedIn">
+              <input
+                v-model.number="transaction.amount"
+                type="number"
+                class="border border-gray-500 block w-full px-6 py-3 mt-4 rounded-full text-gray-800 transition duration-300 ease-in-out focus:outline-none focus:shadow-outline"
+                placeholder="Amount in Rp"
+                @keyup.enter="fund"
+              />
+              <button
+                class="text-center mt-3 button-cta block w-full bg-orange-button hover:bg-green-button text-white font-medium px-6 py-3 text-md rounded-full"
+                @click="fund"
+              >
+                Fund Now
+              </button>
+            </template>
+            <template v-else>
+              <button
+                class="text-center mt-3 button-cta block w-full bg-orange-button hover:bg-green-button text-white font-medium px-6 py-3 text-md rounded-full"
+                @click="$router.push({ path: '/login' })"
+              >
+                Sign in to Fund
+              </button>
+            </template>
           </div>
         </div>
       </div>
@@ -129,7 +141,12 @@ export default {
   data() {
     return {
       default_image: '',
-    }
+      transaction: {
+        campaign_id: Number.parseInt(this.$route.params.id),
+        amount: undefined,
+      },
+      errorMessage: '',
+    };
   },
   mounted() {
     this.default_image = `${this.$axios.defaults.baseURL}/${this.campaignDetail.data.image_url}`;
@@ -138,6 +155,18 @@ export default {
     changeImage(url) {
       this.default_image = url;
     },
+    async fund() {
+      try {
+        if (this.transaction.amount === undefined || this.transaction.amount === 0) {
+          this.errorMessage = 'Please fill the amount field';
+          return
+        }
+        const response = await this.$axios.post('/api/v1/transactions', this.transaction);
+        window.location = response.data.data.payment_url;
+      } catch (error) {
+        this.errorMessage = 'Something went wrong';
+      }
+    }
   },
 }
 </script>

@@ -15,6 +15,7 @@ Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfundi
 - [Auth - Nuxt (Local Scheme)](https://auth.nuxtjs.org/schemes/local)
 - [Auth - Nuxt (API)](https://auth.nuxtjs.org/api/auth/)
 - [Axios - Nuxt](https://axios.nuxtjs.org/)
+- [Midtrans Sandbox Test](https://docs.midtrans.com/en/technical-reference/sandbox-test)
 
 ## Requirements
 
