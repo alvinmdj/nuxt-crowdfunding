@@ -14,6 +14,7 @@ Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfundi
 - [Auth - Nuxt](https://auth.nuxtjs.org/)
 - [Auth - Nuxt (Local Scheme)](https://auth.nuxtjs.org/schemes/local)
 - [Auth - Nuxt (API)](https://auth.nuxtjs.org/api/auth/)
+- [Auth - Nuxt (Middleware)](https://auth.nuxtjs.org/guide/middleware)
 - [Axios - Nuxt](https://axios.nuxtjs.org/)
 - [Vue Router Object Props](https://v3.router.vuejs.org/api/#the-route-object)
 - [Nuxt Contexts Universal Keys](https://nuxtjs.org/docs/internals-glossary/context/#universal-keys)
