@@ -65,7 +65,7 @@
 export default {
   name: "DashboardTransactionsPage",
   middleware: 'auth',
-  async asyncData({ $axios, app }) {
+  async asyncData({ $axios }) {
     const transactions = await $axios.$get(`/api/v1/transactions`);
     return { transactions };
   }
