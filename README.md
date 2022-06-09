@@ -16,6 +16,7 @@ Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfundi
 - [Auth - Nuxt (API)](https://auth.nuxtjs.org/api/auth/)
 - [Axios - Nuxt](https://axios.nuxtjs.org/)
 - [Vue Router Object Props](https://v3.router.vuejs.org/api/#the-route-object)
+- [Nuxt Contexts Universal Keys](https://nuxtjs.org/docs/internals-glossary/context/#universal-keys)
 - [Midtrans Sandbox Test](https://docs.midtrans.com/en/technical-reference/sandbox-test)
 - [Setup Midtrans Redirection URL](https://dashboard.sandbox.midtrans.com/settings/snap_preference)
 - [Setup Midtrans Redirection URL 2](https://dashboard.sandbox.midtrans.com/settings/vtweb_configuration)

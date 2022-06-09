@@ -5,6 +5,7 @@
         <img src="/funded-illustration.svg" alt="" class="w-full" />
       </div>
       <div v-if="$router.currentRoute.query.transaction_status === 'pending'">
+      <!-- same as: <div v-if="$route.query.transaction_status === 'pending'"> -->
         <h2 class="font-medium mb-3 text-3xl text-center">
           Wow! Your transaction is pending.
         </h2>
