@@ -17,6 +17,8 @@ Back-end repository: [Go Crowdfunding](https://github.com/alvinmdj/go-crowdfundi
 - [Auth - Nuxt (Middleware)](https://auth.nuxtjs.org/guide/middleware)
 - [Axios - Nuxt](https://axios.nuxtjs.org/)
 - [Vue Router Object Props](https://v3.router.vuejs.org/api/#the-route-object)
+- [Vue Toasted](https://github.com/shakee93/vue-toasted)
+- [Nuxt Toast](https://www.npmjs.com/package/@nuxtjs/toast)
 - [Nuxt Contexts Universal Keys](https://nuxtjs.org/docs/internals-glossary/context/#universal-keys)
 - [Midtrans Sandbox Test](https://docs.midtrans.com/en/technical-reference/sandbox-test)
 - [Setup Midtrans Redirection URL](https://dashboard.sandbox.midtrans.com/settings/snap_preference)

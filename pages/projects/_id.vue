@@ -65,7 +65,6 @@
                 {{ perk }}
               </li>
             </ul>
-            <DangerAlert v-if="errorMessage !== ''" :error-message="errorMessage" />
             <template v-if="$store.state.auth.loggedIn">
               <input
                 v-model.number="transaction.amount"
@@ -145,7 +144,6 @@ export default {
         campaign_id: Number.parseInt(this.$route.params.id),
         amount: undefined,
       },
-      errorMessage: '',
     };
   },
   mounted() {
@@ -157,14 +155,14 @@ export default {
     },
     async fund() {
       try {
-        if (this.transaction.amount === undefined || this.transaction.amount === 0) {
-          this.errorMessage = 'Please fill the amount field';
-          return
+        if (this.transaction.amount === undefined || this.transaction.amount === 0 || this.transaction.amount === '') {
+          this.$toast.error('Please enter amount');
+          return;
         }
         const response = await this.$axios.post('/api/v1/transactions', this.transaction);
         window.location = response.data.data.payment_url;
       } catch (error) {
-        this.errorMessage = 'Something went wrong';
+        this.$toast.error('Something went wrong');
       }
     }
   },

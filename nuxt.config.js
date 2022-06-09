@@ -48,7 +48,9 @@ export default {
     '@nuxtjs/pwa',
     // https://auth.nuxtjs.org/
     '@nuxtjs/auth',
-    // '@nuxtjs/auth-next'
+    // '@nuxtjs/auth-next' -> not working (loggedIn always false)
+    // https://www.npmjs.com/package/@nuxtjs/toast
+    '@nuxtjs/toast',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -76,6 +78,11 @@ export default {
         },
       },
     },
+  },
+
+  toast: {
+    position: 'top-center',
+    duration: '3000',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

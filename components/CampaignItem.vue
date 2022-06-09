@@ -43,12 +43,12 @@
           <div class="ml-auto font-semibold">Rp {{ new Intl.NumberFormat().format(campaign.goal_amount) }}</div>
         </div>
       </div>
-      <NuxtLink
-        :to="`/projects/${campaign.id}`"
+      <button
         class="text-center mt-5 button-cta block w-full bg-orange-button hover:bg-green-button text-white font-semibold px-6 py-2 text-lg rounded-full"
+        @click="$router.push({ name: 'projects-id', params: { id: campaign.id } })"
       >
         Fund Now
-      </NuxtLink>
+      </button>
     </div>
   </div>
 </template>

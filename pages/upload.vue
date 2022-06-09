@@ -31,7 +31,6 @@
       <p class="text-white text-center font-light mb-4">
         Please upload your profile picture
       </p>
-      <DangerAlert v-if="errorMessage" :error-message="errorMessage" />
       <div class="mb-4 mt-6">
         <div class="mb-3">
           <button
@@ -66,8 +65,7 @@ export default {
     return {
       url: '/avatar.jpg',
       selectedFile: undefined,
-      errorMessage: '',
-    }
+    };
   },
   methods: {
     onFileChange(e) {
@@ -85,10 +83,11 @@ export default {
             'Content-Type': 'multipart/form-data',
           },
         });
+        this.$toast.success('Avatar uploaded successfully');
         await this.$auth.fetchUser();
         this.$router.push({ path: '/register-success' });
       } catch (error) {
-        this.errorMessage = 'Failed to upload avatar. Please try again.';
+        this.$toast.error('Failed to upload avatar. Please try again.');
       }
     },
   },

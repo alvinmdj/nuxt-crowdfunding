@@ -8,7 +8,6 @@
         <h2 class='font-normal mb-6 text-3xl text-white'>
           Sign In to Your Account
         </h2>
-        <DangerAlert v-if="errorMessage !== ''" :error-message="errorMessage" />
         <div class='my-6'>
           <div class='mb-4'>
             <label class='font-normal text-lg text-white block mb-3'>
@@ -60,11 +59,8 @@
 </template>
 
 <script>
-import DangerAlert from '~/components/DangerAlert.vue';
-
 export default {
   name: 'LoginPage',
-  components: { DangerAlert },
   layout: 'auth',
   data() {
     return {
@@ -72,7 +68,6 @@ export default {
         email: '',
         password: '',
       },
-      errorMessage: '',
     };
   },
   methods: {
@@ -80,19 +75,20 @@ export default {
       try {
         // Check if all fields are filled
         if (!this.login.email || !this.login.password) {
-          this.errorMessage = 'Please fill in all fields';
+          this.$toast.error('Please fill in all fields');
           return;
         }
 
         // call the login endpoint set in nuxt.config.js
         const response = await this.$auth.loginWith('local', { data: this.login });
         this.$auth.setUser(response.data.data);
+        this.$toast.success('You have successfully logged in');
       }
       catch (error) {
         if (error.response.status === 422) {
-          this.errorMessage = 'Email or password is incorrect.';
+          this.$toast.error('Email or password is incorrect.');
         } else {
-          this.errorMessage = 'An unknown error occurred. Please try again.';
+          this.$toast.error('An unknown error occurred. Please try again.');
         }
       }
     },

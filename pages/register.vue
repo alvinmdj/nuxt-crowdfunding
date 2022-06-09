@@ -8,7 +8,6 @@
         <h2 class="font-normal mb-6 text-3xl text-white">
           Sign Up Account
         </h2>
-        <DangerAlert v-if="errorMessage" :error-message="errorMessage" />
         <div class="mb-6 mt-3">
           <div class="mb-4">
             <label class="font-normal text-lg text-white block mb-3">
@@ -97,7 +96,6 @@ export default {
         email: '',
         password: '',
       },
-      errorMessage: '',
     }
   },
   methods: {
@@ -105,7 +103,7 @@ export default {
       try {
         // Check if all fields are filled
         if (!this.register.name || !this.register.occupation || !this.register.email || !this.register.password) {
-          this.errorMessage = 'Please fill all the fields';
+          this.$toast.error('Please fill all the fields');
           return;
         }
 
@@ -114,16 +112,18 @@ export default {
           email: this.register.email,
         });
         if (!data.is_available) {
-          this.errorMessage = 'Email already exists';
+          this.$toast.error('Email already exists');
           return;
         }
 
         // Register user
         const response = await this.$axios.$post('/api/v1/users', this.register);
-        this.$auth.setUserToken(response.data.token)
-          .then(() => this.$router.push({ path: '/upload' }));
+        this.$auth.setUserToken(response.data.token).then(() => {
+          this.$toast.success('Account created successfully');
+          this.$router.push({ path: '/upload' })
+        });
       } catch (error) {
-        this.errorMessage = 'An unknown error occurred. Please try again.';
+        this.$toast.error('An unknown error occurred. Please try again.');
       }
     },
   },
