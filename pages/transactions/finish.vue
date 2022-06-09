@@ -4,14 +4,26 @@
       <div class="flex justify-center items-center mx-auto mt-6 mb-8">
         <img src="/funded-illustration.svg" alt="" class="w-full" />
       </div>
-      <h2 class="font-medium mb-3 text-3xl text-center">
-        Yeay! You are super
-      </h2>
-      <p class="text-center font-light">
-        Your money has ben transferred
-        <br />
-        into company's account
-      </p>
+      <div v-if="$router.currentRoute.query.transaction_status === 'pending'">
+        <h2 class="font-medium mb-3 text-3xl text-center">
+          Wow! Your transaction is pending.
+        </h2>
+        <p class="text-center font-light">
+          Proceed payment as instructed
+          <br />
+          to complete your transaction.
+        </p>
+      </div>
+      <div v-else>
+        <h2 class="font-medium mb-3 text-3xl text-center">
+          Yeay! You are super!
+        </h2>
+        <p class="text-center font-light">
+          Your money has ben transferred
+          <br />
+          to the project owner.
+        </p>
+      </div>
       <div class="mb-4 mt-6">
         <div class="mb-3">
           <button
