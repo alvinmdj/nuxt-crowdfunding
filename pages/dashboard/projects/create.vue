@@ -16,12 +16,12 @@
           <h3 class="text-2xl text-gray-900 mb-4">Create New Projects</h3>
         </div>
         <div class="w-1/4 text-right">
-          <NuxtLink
-            href="/dashboard"
+          <button
             class="bg-green-button hover:bg-green-button text-white font-bold px-4 py-1 rounded inline-flex items-center"
+            @click="save"
           >
             Save
-          </NuxtLink>
+          </button>
         </div>
       </div>
       <div class="block mb-2">
@@ -38,9 +38,10 @@
                     Campaign Name
                   </label>
                   <input
+                    v-model="campaign.name"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
-                    placeholder="Contoh: Demi Gunpla Demi Istri"
+                    placeholder="Example: My Campaign"
                   />
                 </div>
                 <div class="w-full md:w-1/2 px-3">
@@ -50,9 +51,10 @@
                     Price
                   </label>
                   <input
+                    v-model.number="campaign.goal_amount"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="number"
-                    placeholder="Contoh: 200000"
+                    placeholder="Example: 2000000"
                   />
                 </div>
                 <div class="w-full px-3">
@@ -62,9 +64,10 @@
                     Short Description
                   </label>
                   <input
+                    v-model="campaign.short_description"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
-                    placeholder="Deskripsi singkat mengenai projectmu"
+                    placeholder="Short description of your campaign"
                   />
                 </div>
                 <div class="w-full px-3">
@@ -74,9 +77,10 @@
                     What will backers get
                   </label>
                   <input
+                    v-model="campaign.perks"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
-                    placeholder="Contoh: Ayam, Nasi Goreng, Piring"
+                    placeholder="Example: Certificate, T-Shirt, Access to the event"
                   />
                 </div>
                 <div class="w-full px-3">
@@ -86,9 +90,10 @@
                     Description
                   </label>
                   <textarea
+                    v-model="campaign.description"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
-                    placeholder="Isi deskripsi panjang untuk projectmu"
+                    placeholder="Long description of your campaign"
                   ></textarea>
                 </div>
               </div>
@@ -105,6 +110,46 @@
 
 <script>
 export default {
-  name: "DashboardCreatePage",
+  name: 'DashboardCreatePage',
+  middleware: 'auth',
+  data() {
+    return {
+      campaign: {
+        name: '',
+        short_description: '',
+        description: '',
+        goal_amount: 0,
+        perks: '',
+      },
+    };
+  },
+  methods: {
+    async save() {
+      try {
+        // check if all fields are filled
+        if (
+          this.campaign.name === '' ||
+          this.campaign.short_description === '' ||
+          this.campaign.description === '' ||
+          this.campaign.goal_amount === '' ||
+          this.campaign.goal_amount === 0 ||
+          this.campaign.perks === ''
+        ) {
+          this.$toast.error('Please fill in all fields');
+          return;
+        }
+
+        // save campaign
+        const response = await this.$axios.post('/api/v1/campaigns', this.campaign);
+        this.$toast.success('Campaign created successfully');
+        this.$router.push({
+          name: 'dashboard-projects-id', // generated automatically from the folder structure name
+          params: { id: response.data.data.id },
+        });
+      } catch (error) {
+        this.$toast.error('Something went wrong');
+      }
+    },
+  },
 }
 </script>
