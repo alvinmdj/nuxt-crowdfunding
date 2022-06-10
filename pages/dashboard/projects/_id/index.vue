@@ -62,45 +62,37 @@
         </div>
       </div>
       <div class="flex justify-between items-center">
-        <div class="w-3/4 mr-6">
+        <div class="w-2/4 mr-6">
           <h3 class="text-2xl text-gray-900 mb-4 mt-5">Gallery</h3>
         </div>
-        <div class="w-1/4 text-right">
-          <NuxtLink
-            to="/dashboard"
+        <div class="w-2/4 text-right">
+          <input
+            ref="file"
+            type="file"
+            class="border p-1 rounded overflow-hidden"
+            accept="image/*"
+            @change="selectFile"
+          />
+          <button
             class="bg-green-button hover:bg-green-button text-white font-bold px-4 py-1 rounded inline-flex items-center"
+            @click="upload"
           >
             Upload
-          </NuxtLink>
+          </button>
         </div>
       </div>
-      <div class="flex -mx-2">
+      <div class="grid grid-cols-4 gap-4 -mx-2">
         <div
-          class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded"
+          v-for="(image, index) in campaign.data.images"
+          :key="index"
+          class="relative w-full bg-white m-2 p-2 border border-gray-400 rounded"
         >
           <figure class="item-thumbnail">
-            <img src="/project-slider-1.jpg" alt="" class="rounded w-full" />
-          </figure>
-        </div>
-        <div
-          class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded"
-        >
-          <figure class="item-thumbnail">
-            <img src="/project-slider-2.jpg" alt="" class="rounded w-full" />
-          </figure>
-        </div>
-        <div
-          class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded"
-        >
-          <figure class="item-thumbnail">
-            <img src="/project-slider-3.jpg" alt="" class="rounded w-full" />
-          </figure>
-        </div>
-        <div
-          class="relative w-1/4 bg-white m-2 p-2 border border-gray-400 rounded"
-        >
-          <figure class="item-thumbnail">
-            <img src="/project-slider-4.jpg" alt="" class="rounded w-full" />
+            <img
+              :src="`${$axios.defaults.baseURL}/${image.image_url}`"
+              alt="project preview"
+              class="rounded w-full"
+            />
           </figure>
         </div>
       </div>
@@ -153,6 +145,38 @@ export default {
     const campaign = await $axios.$get(`/api/v1/campaigns/${params.id}`);
     const transactions = await $axios.$get(`/api/v1/campaigns/${params.id}/transactions`);
     return { campaign, transactions };
+  },
+  data() {
+    return {
+      selectedFile: undefined,
+    }
+  },
+  methods: {
+    selectFile() {
+      this.selectedFile = this.$refs.file.files;
+    },
+    async load() {
+      const campaign = await this.$axios.$get(`/api/v1/campaigns/${this.$route.params.id}`);
+      this.campaign = campaign;
+    },
+    async upload() {
+      const formData = new FormData();
+      formData.append('campaign_id', this.$route.params.id);
+      formData.append('file', this.selectedFile.item(0));
+      formData.append('is_primary', true);
+
+      try {
+        const response = await this.$axios.post('/api/v1/campaign-images', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        console.log(response);
+
+        this.load();
+        this.selectedFile = undefined;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>
