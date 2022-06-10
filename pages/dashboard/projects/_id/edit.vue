@@ -13,14 +13,14 @@
       </div>
       <div class="flex justify-between items-center">
         <div class="w-3/4 mr-6">
-          <h3 class="text-2xl text-gray-900 mb-4">Create New Projects</h3>
+          <h3 class="text-2xl text-gray-900 mb-4">Edit Campaign "{{ campaign.data.name }}"</h3>
         </div>
         <div class="w-1/4 text-right">
           <button
             class="bg-green-button hover:bg-green-button text-white font-bold px-4 py-1 rounded inline-flex items-center"
             @click="save"
           >
-            Save
+            Update
           </button>
         </div>
       </div>
@@ -38,7 +38,7 @@
                     Campaign Name
                   </label>
                   <input
-                    v-model="campaign.name"
+                    v-model="campaign.data.name"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
                     placeholder="Example: My Campaign"
@@ -51,7 +51,7 @@
                     Price
                   </label>
                   <input
-                    v-model.number="campaign.goal_amount"
+                    v-model.number="campaign.data.goal_amount"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="number"
                     placeholder="Example: 2000000"
@@ -64,7 +64,7 @@
                     Short Description
                   </label>
                   <input
-                    v-model="campaign.short_description"
+                    v-model="campaign.data.short_description"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
                     placeholder="Short description of your campaign"
@@ -77,7 +77,7 @@
                     What will backers get
                   </label>
                   <input
-                    v-model="campaign.perks"
+                    v-model="campaign.data.perks"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
                     placeholder="Example: Certificate, T-Shirt, Access to the event"
@@ -90,7 +90,7 @@
                     Description
                   </label>
                   <textarea
-                    v-model="campaign.description"
+                    v-model="campaign.data.description"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     type="text"
                     placeholder="Long description of your campaign"
@@ -112,16 +112,9 @@
 export default {
   name: 'DashboardCreatePage',
   middleware: 'auth',
-  data() {
-    return {
-      campaign: {
-        name: '',
-        short_description: '',
-        description: '',
-        goal_amount: 0,
-        perks: '',
-      },
-    };
+  async asyncData({ $axios, params }) {
+    const campaign = await $axios.$get(`/api/v1/campaigns/${params.id}`);
+    return { campaign };
   },
   methods: {
     async save() {
@@ -139,17 +132,19 @@ export default {
           return;
         }
 
-        // save campaign
-        const response = await this.$axios.post('/api/v1/campaigns', this.campaign);
-        this.$toast.success('Campaign created successfully');
-        this.$router.push({
-          name: 'dashboard-projects-id', // generated automatically from the folder structure name
-          params: { id: response.data.data.id },
+        // update campaign
+        await this.$axios.put(`/api/v1/campaigns/${this.$route.params.id}`, {
+          name: this.campaign.data.name,
+          short_description: this.campaign.data.short_description,
+          description: this.campaign.data.description,
+          goal_amount: this.campaign.data.goal_amount,
+          perks: this.campaign.data.perks,
         });
+        this.$toast.success('Campaign created successfully');
       } catch (error) {
         this.$toast.error('Something went wrong');
       }
     },
   },
-}
+};
 </script>
